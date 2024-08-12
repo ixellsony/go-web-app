@@ -3,20 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Application Web</title>
-    <style>
-        .content { padding: 20px; }
-    </style>
+    <title>Web App</title>
     <script>
         function loadView(viewName, params = {}) {
-    // Construire l'URL avec les paramètres
     const queryString = Object.keys(params)
         .map(key => `${encodeURIComponent(key)}=${encodeURIComponent(params[key])}`)
         .join('&');
     
     const url = '/view/' + viewName + (queryString ? '?' + queryString : '');
     
-    // Faire la requête pour charger la vue
     const xhr = new XMLHttpRequest();
     xhr.open('GET', url, true);
     xhr.onload = function() {

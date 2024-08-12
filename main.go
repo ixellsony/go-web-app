@@ -30,9 +30,7 @@ func serveView(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// Extraire les paramètres de la requête
 	params := r.URL.Query()
 
-	// Transmettre les paramètres au template
 	tmpl.Execute(w, params)
 }
