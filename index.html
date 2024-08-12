@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Application Web</title>
+    <style>
+        .content { padding: 20px; }
+    </style>
+    <script>
+        function loadView(viewName, params = {}) {
+    // Construire l'URL avec les paramètres
+    const queryString = Object.keys(params)
+        .map(key => `${encodeURIComponent(key)}=${encodeURIComponent(params[key])}`)
+        .join('&');
+    
+    const url = '/view/' + viewName + (queryString ? '?' + queryString : '');
+    
+    // Faire la requête pour charger la vue
+    const xhr = new XMLHttpRequest();
+    xhr.open('GET', url, true);
+    xhr.onload = function() {
+        if (xhr.status === 200) {
+            document.getElementById('content').innerHTML = xhr.responseText;
+        } else {
+            document.getElementById('content').innerHTML = 'Erreur de chargement.';
+        }
+    };
+    xhr.send();
+}
+    </script>
+</head>
+<body>
+    <nav>
+        <nav>
+            <a onclick="loadView('home')">Home</a> |
+            <a onclick="loadView('about')">About</a> |
+            <a onclick="loadView('contact')">Contact</a> |
+            <a onclick="loadView('profile', { userId: 123 })">Profile</a>
+        </nav>        
+    </nav>
+    <div id="content" class="content">
+        <!-- Le contenu sera chargé ici -->
+    </div>
+</body>
+</html>
